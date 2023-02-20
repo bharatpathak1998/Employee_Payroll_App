@@ -1,7 +1,9 @@
 package com.example.employeepayrollapp.controller;
 
+import com.example.employeepayrollapp.dto.EmployeeDto;
 import com.example.employeepayrollapp.model.EmployeeModel;
 import com.example.employeepayrollapp.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,28 +15,33 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
-    @PostMapping("/add")
-    public EmployeeModel add(@RequestBody EmployeeModel employeeModel) {
+    @PostMapping("/addEmployee")
+    public EmployeeDto add(@Valid @RequestBody EmployeeModel employeeModel) {
         return employeeService.save(employeeModel);
     }
 
-    @GetMapping("/get")
-    public List<EmployeeModel> get() {
-        return employeeService.get();
+    @PostMapping("/addEmployees")
+    public List<EmployeeDto> add(@Valid @RequestBody List<EmployeeModel> employeeModel) {
+        return employeeService.saves(employeeModel);
     }
 
-    @GetMapping("/get/{id}")
-    public EmployeeModel get(@PathVariable long id) {
+    @GetMapping("/getEmployees")
+    public List<EmployeeDto> get() {
+        return employeeService.getAll();
+    }
+
+    @GetMapping("/getEmployee/{id}")
+    public EmployeeDto get(@PathVariable long id) {
         return employeeService.getById(id);
     }
 
-    @PutMapping("/put/{id}")
-    public EmployeeModel update(@PathVariable long id, @RequestBody EmployeeModel employeeModel) {
+    @PutMapping("/putEmployee/{id}")
+    public EmployeeDto update(@PathVariable long id, @Valid @RequestBody EmployeeModel employeeModel) {
         return employeeService.updateById(id, employeeModel);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable long id) {
-        employeeService.deleteById(id);
+    @DeleteMapping("/deleteEmployee/{id}")
+    public String deleteById(@PathVariable long id) {
+        return employeeService.deleteById(id);
     }
 }

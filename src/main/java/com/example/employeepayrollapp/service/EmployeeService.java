@@ -1,18 +1,21 @@
 package com.example.employeepayrollapp.service;
 
+import com.example.employeepayrollapp.dto.EmployeeDto;
 import com.example.employeepayrollapp.model.EmployeeModel;
 
 import java.util.List;
 
 public interface EmployeeService {
 
-    EmployeeModel save(EmployeeModel employeeModel);
+    EmployeeDto save(EmployeeModel employeeModel);
 
-    List<EmployeeModel> get();
+    List<EmployeeDto> saves(List<EmployeeModel> employeeModel);
 
-    EmployeeModel getById(long id);
+    List<EmployeeDto> getAll();
 
-    EmployeeModel updateById(long id, EmployeeModel employeeModel);
+    EmployeeDto getById(long id);
 
-    void deleteById(long id);
+    EmployeeDto updateById(long id, EmployeeModel employeeModel);
+
+    String deleteById(long id);
 }

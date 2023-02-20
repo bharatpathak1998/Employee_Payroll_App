@@ -1,65 +1,37 @@
 package com.example.employeepayrollapp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "Employee_Table")
 public class EmployeeModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long employeeId;
+
+    @NotEmpty(message = "Name should not be empty!")
     private String name;
+
     private long salary;
+
+    @NotEmpty(message = "Gender should not be empty!")
     private String gender;
+
+    @NotEmpty(message = "Address should not be empty!")
     private String address;
+
+    @NotEmpty(message = "Email should not be empty!")
+    @Pattern(regexp = "^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9]+[.]co(m|.in)$", message = "Invalid email address!")
     private String email;
 
-    public long getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(long employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public long getSalary() {
-        return salary;
-    }
-
-    public void setSalary(long salary) {
-        this.salary = salary;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    @NotEmpty(message = "Phone number should not be empty!")
+    @Pattern(regexp = "^\\d{10}$", message = "Invalid phone number!")
+    private String phoneNumber;
 }
